@@ -7,6 +7,24 @@ d3.csv("data/colleges.csv", function(error, data) {
 	if (error) throw error;
 	var tmp = data
 	console.log(data[0]);
+	for (var i=0; i<data.length; ++i) {
+		// data[i].GPA = Number(data[i].GPA);
+		// data[i].SATM = Number(data[i].SATM);
+		// data[i].SATV = Number(data[i].SATV);
+		// data[i].ACT = Number(data[i].ACT);
+		for (var key in data[i]) {
+			if (data[i].hasOwnProperty(key)) {
+				if (key != 'Name' && key != 'Control' && key != 'Region' && key != 'Locale') {
+					data[i][key] = Number(data[i][key])
+				}
+			}
+		}
+	}
+	console.log(data[0])
+	console.log(data)
+	data.sort(function(a, b) {return a['Admission Rate'] - b['Admission Rate']})
+	console.log(data[0])
+	console.log(data[1])
 	// var regionMetrics = d3.nest()
 	// 	.key(function(d) { return d.region; })
 	// 	.rollup(function(v) { return d3.sum(v, function(d) { return d.sales; }) })
